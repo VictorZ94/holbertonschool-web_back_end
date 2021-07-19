@@ -4,4 +4,6 @@
 
 
 def add(a: float, b: float) -> float:
+    """def add(a, b) #type retuned float 
+    """
     return a + b
