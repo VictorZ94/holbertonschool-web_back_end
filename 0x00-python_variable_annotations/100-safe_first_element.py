@@ -5,6 +5,8 @@ from typing import Any, Union
 
 
 def safe_first_element(lst: Any) -> Union[Any, None]:
+    """ complex type-annotated to Any
+    """
     if lst:
         return lst[0]
     else:
