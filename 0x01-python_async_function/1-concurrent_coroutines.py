@@ -2,13 +2,13 @@
 """ function with multy coroutines
 """
 import asyncio
-from typing import List
+from typing import List, Sequence
 
 
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-async def wait_n(n: int, max_delay: int) -> List:
+async def wait_n(n: int, max_delay: int) -> List[Sequence]:
     """
     Args:
         n (int): times to iterate
