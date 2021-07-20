@@ -4,7 +4,7 @@
 from typing import Tuple, List, Any
 
 
-def zoom_array(lst: Tuple, factor: int = 2) -> List[Any]:
+def zoom_array(lst: Tuple, factor: int = 2) -> List:
     """ Check type-annotated using mypy
     """
     zoomed_in: List[Any] = [
