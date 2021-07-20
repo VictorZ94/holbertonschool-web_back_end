@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """ complex type-annotated to Any
 """
-from typing import Any, Union
+from typing import Any, Union, Sequence
 
 
-def safe_first_element(lst: Any) -> Union[Any, None]:
+def safe_first_element(lst: Sequence[Any]) -> Union[Any, None]:
     """ complex type-annotated to Any
     """
     if lst:
