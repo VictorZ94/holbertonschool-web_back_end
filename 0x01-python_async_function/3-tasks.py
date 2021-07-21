@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""function that measures the total execution time for wait_n(n, max_delay)
+"""function asyncio Task
 """
 import asyncio
 from typing import Any
