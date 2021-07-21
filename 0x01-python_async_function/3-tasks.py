@@ -2,12 +2,12 @@
 """function asyncio Task
 """
 import asyncio
-from typing import Any
+
 
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-def task_wait_random(max_delay: int) -> Any:
+def task_wait_random(max_delay: int) -> float:
     """
     Args:
         max_delay (int, optional): [description]. Defaults to 10.
