@@ -3,15 +3,15 @@
 """
 import asyncio
 import random
-from typing import AsyncGenerator
+from typing import Generator
 
 
-async def async_generator() -> AsyncGenerator:
+async def async_generator() -> Generator[float, None, None]:
     """
     Yields:
         [type]: [description]
     """
     n: int = 10
     for i in range(n):
-        yield random.uniform(0, n)
         await asyncio.sleep(1)
+        yield random.uniform(0, n)
