@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
-""" Implement a caching system 
+""" Implement a caching system
     cache replacement algorithm - FIFO
 """
 from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
-
-
     def __init__(self):
         super().__init__()
 
