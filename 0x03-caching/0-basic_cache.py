@@ -8,11 +8,10 @@ from base_caching import BaseCaching
 class BasicCache(BaseCaching):
     """inherit from BaseCaching and is a caching system
     Args:
-        BaseCaching (Father class): Implement methods 
+        BaseCaching (Father class): Implement methods
     """
     def __init__(self):
         super().__init__()
-
 
     def put(self, key, item):
         """assign to the dictionary an item key-value pair
@@ -20,9 +19,8 @@ class BasicCache(BaseCaching):
             key ([type] Any): [key of the dict]
             item ([type] Any): [value of the dict]
         """
-        if key != None or item != None:
+        if key is not None or item is not None:
             self.cache_data.update({key: item})
-
 
     def get(self, key):
         """Obtain a value from dict by key
@@ -31,9 +29,10 @@ class BasicCache(BaseCaching):
         Returns:
             [type] Any: value from dict
         """
-        if key != None:
+        if key is not None:
             value = self.cache_data.get(key)
-            if value == None:
+            if value is None:
                 return None
             return value
-        return None
+        else:
+            return None
