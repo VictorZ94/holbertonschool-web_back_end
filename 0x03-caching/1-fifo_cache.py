@@ -18,8 +18,6 @@ class FIFOCache(BaseCaching):
         """
         if key is not None and item is not None:
             self.cache_data.update({key: item})
-        if key is not None and item is not None:
-            self.cache_data.update({key: item})
 
         len_cache = len(self.cache_data)
         if len_cache > self.MAX_ITEMS:
