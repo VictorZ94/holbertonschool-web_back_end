@@ -17,8 +17,8 @@ class LIFOCache(BaseCaching):
         """ Add an item in the cache
         """
         if key is not None and item is not None:
-            self.cache_data.update({key: item})
-        if key is not None and item is not None:
+            if self.cache_data.get(key):
+                self.cache_data.pop(key)
             self.cache_data.update({key: item})
 
         len_cache = len(self.cache_data)
