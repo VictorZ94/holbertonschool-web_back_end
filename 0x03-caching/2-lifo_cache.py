@@ -23,9 +23,7 @@ class LIFOCache(BaseCaching):
 
         len_cache = len(self.cache_data)
         if len_cache > self.MAX_ITEMS:
-            index_dict = {}
-            for i, j in enumerate(self.cache_data):
-                index_dict.update({i: j})
+            index_dict = {i: j for i, j in enumerate(self.cache_data)}
             print(f"DISCARD: {index_dict.get(3)}")
             self.cache_data.pop(index_dict.get(3))
 
