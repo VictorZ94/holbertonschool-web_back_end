@@ -6,6 +6,10 @@ from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
+    """inherit from BaseCaching and is a caching system
+    Args:
+        BaseCaching (Father class): Implement methods
+    """
     def __init__(self):
         super().__init__()
 
