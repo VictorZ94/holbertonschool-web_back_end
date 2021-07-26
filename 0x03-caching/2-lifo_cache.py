@@ -16,16 +16,14 @@ class LIFOCache(BaseCaching):
     def put(self, key, item):
         """ Add an item in the cache
         """
-        if key is not None and item is not None:
-            if self.cache_data.get(key):
-                self.cache_data.pop(key)
-            self.cache_data.update({key: item})
-
-        len_cache = len(self.cache_data)
-        if len_cache > BaseCaching.MAX_ITEMS:
-            index_dict = {i: j for i, j in enumerate(self.cache_data)}
-            print(f"DISCARD: {index_dict.get(3)}")
-            self.cache_data.pop(index_dict.get(3))
+        
+        if key is None or item is None:
+            return
+        self.cache_data.update({key: item})
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            last = list(self.cache_data)[-2]
+            print('DISCARD:', last)
+            self.cache_data.pop(last)
 
     def get(self, key):
         """Obtain a value from dict by key
