@@ -21,10 +21,11 @@ class LIFOCache(BaseCaching):
         if key is None or item is None:
             return
         self.cache_data.update({key: item})
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            last = list(self.cache_data)[-2]
-            print('DISCARD:', last)
-            self.cache_data.pop(last)
+        len_cache = len(self.cache_data)
+        if len_cache > BaseCaching.MAX_ITEMS:
+            last_key = list(self.cache_data)[-2]
+            print('DISCARD:', last_key)
+            self.cache_data.pop(last_key)
 
     def get(self, key):
         """Obtain a value from dict by key
