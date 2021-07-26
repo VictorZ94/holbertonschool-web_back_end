@@ -11,12 +11,13 @@ class LIFOCache(BaseCaching):
         BaseCaching (Father class): Implement methods
     """
     def __init__(self):
+        """Init method from father
+        """
         super().__init__()
 
     def put(self, key, item):
         """ Add an item in the cache
         """
-        
         if key is None or item is None:
             return
         self.cache_data.update({key: item})
