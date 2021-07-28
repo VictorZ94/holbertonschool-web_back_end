@@ -45,4 +45,4 @@ class Server:
         dataset = self.dataset()
         if offset[0] > len(dataset) or offset[1] > len(dataset):
             return []
-        return [dataset[i] for i in range(offset[0], offset[1])]
+        return [dataset[row] for row in range(offset[0], offset[1])]
