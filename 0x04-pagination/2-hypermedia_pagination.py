@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""
+""" Class to filter from dataset
 """
 
 
@@ -14,6 +14,8 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
+        """ dataset attribute
+        """
         self.__dataset = None
 
     def dataset(self) -> List[List]:
