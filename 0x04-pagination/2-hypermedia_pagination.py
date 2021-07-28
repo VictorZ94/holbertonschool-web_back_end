@@ -50,10 +50,10 @@ class Server:
         return [dataset[row] for row in range(offset[0], offset[1])]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
-        data_hyper: Dict = {}
-        data_hyper['page_size'] = page_size
-        data_hyper['page'] = page
         data = self.get_page(page, page_size)
+        data_hyper: Dict = {}
+        data_hyper['page_size'] = len(data)
+        data_hyper['page'] = page
         data_hyper['data'] = data
 
         next_page: Any = page + 1
