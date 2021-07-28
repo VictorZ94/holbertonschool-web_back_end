@@ -58,7 +58,7 @@ class Server:
         data_hyper['data'] = data
 
         next_page: Any = page + 1
-        if next_page > total_pages:
+        if next_page >= total_pages:
             next_page = None
         data_hyper['next_page'] = next_page
 
