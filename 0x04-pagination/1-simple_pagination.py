@@ -43,6 +43,6 @@ class Server:
         assert page > 0 and page_size > 0
         offset = self.index_range(page, page_size)
         dataset = self.dataset()
-        if offset[0] > len(dataset) and offset[1] > len(dataset):
+        if offset[0] > len(dataset) or offset[1] > len(dataset):
             return []
         return [dataset[i] for i in range(offset[0], offset[1])]
