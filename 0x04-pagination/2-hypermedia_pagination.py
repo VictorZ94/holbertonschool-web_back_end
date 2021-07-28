@@ -50,6 +50,14 @@ class Server:
         return [dataset[row] for row in range(offset[0], offset[1])]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+        """ Get hyper method link
+        Args:
+            page (int, optional): [description]. Defaults to 1.
+            page_size (int, optional): [description]. Defaults to 10.
+
+        Returns:
+            Dict: [description]
+        """
         data = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset()) / page_size)
         data_hyper: Dict = {}
