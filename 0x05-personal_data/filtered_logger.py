@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""[summary]
+"""log message obfuscated:
 """
 import re
 from typing import List
@@ -7,9 +7,12 @@ from typing import List
 
 def filter_datum(fields: List[str],
                  redaction: str,
-                 message: List[str],
+                 message: str,
                  separator: str) -> str:
-    for i in fields:
-        string = re.sub(f"{i}=[^=]*{separator}",
-                        f"{i}={redaction}{separator}", message)
-    return string
+    """return string obfuscated
+    """
+    for field in fields:
+
+        message = re.sub(f"{field}=.*?{separator}",
+                         f"{field}={redaction}{separator}", message)
+    return message
