@@ -37,3 +37,18 @@ class RedactingFormatter(logging.Formatter):
             message = re.sub(f"{field}=.*?{separator}",
                              f"{field}={redaction}{separator}", message)
         return message
+
+
+def get_logger() -> logging.Logger:
+    """Create logger
+    Returns:
+        logging.Logger: a Logger object.
+    """
+    logger = logging.getLogger("user_data")
+    logger.propagate = False
+    s_handler = logging.StreamHandler()
+    s_handler.setLevel(logging.INFO)
+    formatter = RedactingFormatter(PII_FIELDS)
+    s_handler.setFormatter(formatter)
+    logger.addHandler(s_handler)
+    return logger
