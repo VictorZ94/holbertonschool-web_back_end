@@ -34,10 +34,10 @@ class RedactingFormatter(logging.Formatter):
         """Log formatter
         """
         return filter_datum(self.fields,
-                                 self.REDACTION,
-                                 super(RedactingFormatter,
-                                       self).format(record),
-                                 self.SEPARATOR)
+                            self.REDACTION,
+                            super(RedactingFormatter,
+                                  self).format(record),
+                            self.SEPARATOR)
 
 
 def get_logger() -> logging.Logger:
