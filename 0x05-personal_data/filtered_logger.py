@@ -6,6 +6,16 @@ from typing import List
 import logging
 
 
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
+    """return string obfuscated
+    """
+    for field in fields:
+        message = re.sub(f"{field}=.*?{separator}",
+                         f"{field}={redaction}{separator}", message)
+    return message
+
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
     """
@@ -23,20 +33,11 @@ class RedactingFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         """Log formatter
         """
-        return self.filter_datum(self.fields,
+        return filter_datum(self.fields,
                                  self.REDACTION,
                                  super(RedactingFormatter,
                                        self).format(record),
                                  self.SEPARATOR)
-
-    def filter_datum(self, fields: List[str], redaction: str,
-                     message: str, separator: str) -> str:
-        """return string obfuscated
-        """
-        for field in fields:
-            message = re.sub(f"{field}=.*?{separator}",
-                             f"{field}={redaction}{separator}", message)
-        return message
 
 
 def get_logger() -> logging.Logger:
