@@ -18,6 +18,7 @@ def filter_datum(fields: List[str], redaction: str,
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
     """
