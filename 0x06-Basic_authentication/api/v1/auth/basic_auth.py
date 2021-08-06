@@ -2,6 +2,7 @@
 """ Implement a class for basic authentication
 """
 from api.v1.auth.auth import Auth
+from base64 import b64decode
 
 
 class BasicAuth(Auth):
@@ -19,3 +20,18 @@ class BasicAuth(Auth):
             return None
         else:
             return authorization_header.split()[1]
+
+    def decode_base64_authorization_header(self,
+                                           base64_authorization_header:
+                                           str) -> str:
+        """ it returns the decoded value of a Base64 string
+        """
+        if base64_authorization_header is None:
+            return None
+        elif not isinstance(base64_authorization_header, str):
+            return None
+        try:
+            b64decode(base64_authorization_header)
+        except Exception:
+            return None
+        return str(b64decode(base64_authorization_header), 'utf-8')
