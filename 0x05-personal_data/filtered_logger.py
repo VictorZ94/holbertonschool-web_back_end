@@ -22,20 +22,6 @@ def filter_datum(fields: List[str], redaction: str,
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
-def get_db() -> connection.MySQLConnection:
-    """ Connect python to a DB
-    """
-    config = {
-        'user': getenv('PERSONAL_DATA_DB_USERNAME', "root"),
-        'password': getenv('PERSONAL_DATA_DB_PASSWORD', ""),
-        'host': getenv('PERSONAL_DATA_DB_HOST', "localhost"),
-        'database': getenv('PERSONAL_DATA_DB_NAME'),
-    }
-
-    cnx = connection.MySQLConnection(**config)
-    return cnx
-
-
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
     """
@@ -73,3 +59,40 @@ def get_logger() -> logging.Logger:
     s_handler.setFormatter(formatter)
     logger.addHandler(s_handler)
     return logger
+
+
+def get_db() -> connection.MySQLConnection:
+    """ Connect python to a DB
+    """
+    config = {
+        'user': getenv('PERSONAL_DATA_DB_USERNAME', "root"),
+        'password': getenv('PERSONAL_DATA_DB_PASSWORD', ""),
+        'host': getenv('PERSONAL_DATA_DB_HOST', "localhost"),
+        'database': getenv('PERSONAL_DATA_DB_NAME'),
+    }
+
+    cnx = connection.MySQLConnection(**config)
+    return cnx
+
+
+def main():
+    """ run when the module is executed.
+    """
+    database = get_db()
+    cursor = database.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM users;")
+    for row in cursor:
+        message = ''
+        for k in row:
+            message += f'{k}={row[k]}; '
+        log_record = logging.LogRecord("user_data", logging.INFO,
+                                       None, None, message, None, None)
+        formatter = RedactingFormatter(fields=("email", "ssn",
+                                       "password", 'name'))
+        print(formatter.format(log_record))
+    cursor.close()
+    database.close()
+
+
+if __name__ == '__main__':
+    main()
