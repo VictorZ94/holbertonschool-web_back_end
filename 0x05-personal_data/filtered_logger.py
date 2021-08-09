@@ -4,6 +4,9 @@
 import re
 from typing import List
 import logging
+import mysql.connector
+from mysql.connector import connection, cursor
+from os import getenv
 
 
 def filter_datum(fields: List[str], redaction: str,
@@ -17,6 +20,20 @@ def filter_datum(fields: List[str], redaction: str,
 
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+
+
+def get_db() -> connection.MySQLConnection:
+    """ Connect python to a DB
+    """
+    config = {
+        'user': getenv('PERSONAL_DATA_DB_USERNAME', "root"),
+        'password': getenv('PERSONAL_DATA_DB_PASSWORD', ""),
+        'host': getenv('PERSONAL_DATA_DB_HOST', "localhost"),
+        'database': getenv('PERSONAL_DATA_DB_NAME'),
+    }
+
+    cnx = connection.MySQLConnection(**config)
+    return cnx
 
 
 class RedactingFormatter(logging.Formatter):
