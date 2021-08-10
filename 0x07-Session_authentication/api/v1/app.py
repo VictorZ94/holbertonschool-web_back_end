@@ -52,13 +52,16 @@ def forbidden(forbidden) -> str:
 def before_request_method():
     """ validate before request
     """
-    list_path = ['/api/v1/status/', '/api/v1/unauthorized/',
-                 '/api/v1/forbidden/']
+    list_path = ['/api/v1/status/',
+                 '/api/v1/unauthorized/',
+                 '/api/v1/forbidden/',
+                 '/api/v1/auth_session/login/']
     if auth is None:
         return
     if not auth.require_auth(request.path, list_path):
         return
-    if auth.authorization_header(request) is None:
+    if auth.authorization_header(request) is None \
+       and auth.session_cookie(request) is None:
         return abort(401)
 
     user = auth.current_user(request)
