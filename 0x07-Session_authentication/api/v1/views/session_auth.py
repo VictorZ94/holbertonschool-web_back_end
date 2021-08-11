@@ -44,9 +44,9 @@ def delete_session():
     """ DELETE: /api/v1//auth_session/logout/
     Delete a session ID
     """
+    print("Estoy entrando al metodo")
     from api.v1.app import auth
-    del_session = auth.destroy_session(request)
-    if not del_session:
+    if auth.destroy_session(request) is None:
         abort(404)
     else:
         return jsonify({}), 200
