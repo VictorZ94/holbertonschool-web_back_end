@@ -25,10 +25,10 @@ def handle_all_routes():
             return jsonify({"error": "no user found for this email"}), 404
     except Exception:
         return None
-    
+
     for user in search_user:
         if not user.is_valid_password(pwd):
-            return jsonify({ "error": "wrong password" }), 401
+            return jsonify({"error": "wrong password"}), 401
 
     from api.v1.app import auth
 
