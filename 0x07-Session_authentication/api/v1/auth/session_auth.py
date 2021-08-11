@@ -37,3 +37,14 @@ class SessionAuth(Auth):
             return None
         from models.user import User
         return User.get(user_id)
+
+    def destroy_session(self, request=None):
+        """ Delete current session
+        """
+        if request is None:
+            return None
+        session_id = self.session_cookie(request)
+        if session_id is None:
+            return False
+        self.user_id_by_session_id.pop(session_id)
+        return True
