@@ -55,8 +55,7 @@ def before_request_method():
     list_path = ['/api/v1/status/',
                  '/api/v1/unauthorized/',
                  '/api/v1/forbidden/',
-                 '/api/v1/auth_session/login/',
-                 '/api/v1/auth_session/logout/']
+                 '/api/v1/auth_session/login/']
     if auth is None:
         return
     if not auth.require_auth(request.path, list_path):
@@ -75,4 +74,4 @@ def before_request_method():
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
-    app.run(host=host, port=port, debug=True)
+    app.run(host=host, port=port)
