@@ -37,3 +37,16 @@ def handle_all_routes():
     result = jsonify(search_user[0].to_json())
     result.set_cookie(Name, session_id)
     return result
+
+@app_views.route('/auth_session/logout', methods=['DELETE'],
+                 strict_slashes=False)
+def delete_session():
+    """ DELETE: /api/v1//auth_session/logout/
+    Delete a session ID
+    """
+    from api.v1.app import auth
+    del_session = auth.destroy_session(request)
+    if not del_session:
+        abort(404)
+    else:
+        return jsonify({}), 200
