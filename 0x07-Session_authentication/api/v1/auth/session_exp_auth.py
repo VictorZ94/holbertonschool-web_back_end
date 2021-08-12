@@ -7,6 +7,8 @@ from datetime import datetime, timedelta
 
 
 class SessionExpAuth(SessionAuth):
+        """ initial to define attribute duration
+        """
     def __init__(self):
         """ initial to define attribute duration
         """
