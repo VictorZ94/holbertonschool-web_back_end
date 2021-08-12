@@ -42,7 +42,7 @@ class SessionAuth(Auth):
         """ Delete current session
         """
         if request is None:
-            return None
+            return False
         session_id = self.session_cookie(request)
         if session_id is None:
             return False
