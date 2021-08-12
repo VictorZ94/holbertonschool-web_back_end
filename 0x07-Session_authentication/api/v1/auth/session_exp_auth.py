@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Session Expiration
+""" Session Expiration to timeout an user
 """
 from api.v1.auth.session_auth import SessionAuth
 from os import getenv
