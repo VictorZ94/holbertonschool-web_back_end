@@ -55,4 +55,4 @@ class Auth:
     def _generate_uuid() -> str:
         """ generate a uniq identifier 
         """
-        return uuid.uuid4()
+        return str(uuid.uuid4())
