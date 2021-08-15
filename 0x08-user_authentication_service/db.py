@@ -44,8 +44,11 @@ class DB:
     def find_user_by(self, **keyword: str) -> User:
         """ search user by argument argument
         """
-        query = self._session.query(User).filter_by(**keyword)
-        user = query.first()
+        try:
+            query = self._session.query(User).filter_by(**keyword)
+            user = query.first()
+        except InvalidRequestError:
+            raise InvalidRequestError
         if user is None:
             raise NoResultFound
         else:
@@ -54,7 +57,7 @@ class DB:
     def update_user(self, user_id: int, **keyword) -> None:
         """ update user by arbitrary argument
         """
-        user = self.find_user_by(id=user_id)
+        user = self.find_user_by(id=str(user_id))
         for k, v in keyword.items():
             if k in user.__dict__:
                 setattr(user, k, v)
