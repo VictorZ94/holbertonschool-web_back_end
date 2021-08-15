@@ -41,11 +41,11 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **keyword: str) -> User:
+    def find_user_by(self, **kwargs: str) -> User:
         """ search user by argument argument
         """
         try:
-            query = self._session.query(User).filter_by(**keyword)
+            query = self._session.query(User).filter_by(**kwargs)
             user = query.first()
         except InvalidRequestError:
             raise InvalidRequestError
@@ -57,7 +57,7 @@ class DB:
     def update_user(self, user_id: int, **keyword) -> None:
         """ update user by arbitrary argument
         """
-        user = self.find_user_by(id=str(user_id))
+        user = self.find_user_by(id=user_id)
         for k, v in keyword.items():
             if k in user.__dict__:
                 setattr(user, k, v)
