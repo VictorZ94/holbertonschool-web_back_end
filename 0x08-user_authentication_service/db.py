@@ -59,7 +59,8 @@ class DB:
         """
         user = self.find_user_by(id=user_id)
         for k, v in kwargs.items():
-            if k in user.__dict__:
+            dict_users = user.__dict__
+            if k in dict_users:
                 setattr(user, k, v)
             else:
                 raise ValueError
