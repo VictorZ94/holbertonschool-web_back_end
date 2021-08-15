@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 """ create password encrypted
 """
-import bcrypt
+#import concrete
 from db import DB
 from user import User
+
+# Universal importation
+import bcrypt
+import uuid
+
+# from slqalchemy
 from sqlalchemy.orm.exc import NoResultFound
 
 
@@ -45,3 +51,8 @@ class Auth:
             return True
         else:
             return False
+
+    def _generate_uuid():
+        """ generate a uniq identifier 
+        """
+        return uuid.uuid4()
