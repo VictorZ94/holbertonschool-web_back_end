@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ create password encrypted
 """
-#import concrete
+# import concrete
 from db import DB
 from user import User
 
@@ -19,6 +19,12 @@ def _hash_password(password: str) -> bytes:
     psw = password.encode('utf-8')
     hashed = bcrypt.hashpw(psw, bcrypt.gensalt())
     return hashed
+
+
+def _generate_uuid() -> str:
+    """ generate a uniq identifier
+    """
+    return str(uuid.uuid4())
 
 
 class Auth:
@@ -51,9 +57,3 @@ class Auth:
             return True
         else:
             return False
-
-    @property
-    def _generate_uuid() -> str:
-        """ generate a uniq identifier 
-        """
-        return str(uuid.uuid4())
