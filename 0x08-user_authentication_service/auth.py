@@ -52,6 +52,7 @@ class Auth:
         else:
             return False
 
+    @property
     def _generate_uuid() -> str:
         """ generate a uniq identifier 
         """
