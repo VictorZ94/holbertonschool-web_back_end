@@ -31,3 +31,17 @@ class Auth:
             psw = _hash_password(password)
             new_user = self._db.add_user(email, psw)
             return new_user
+
+    def valid_login(self, email: str, password: str):
+        """ Valid login user authentication
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+        except Exception:
+            return False
+
+        if bcrypt.checkpw(password.encode('utf-8'),
+                          user.hashed_password) and user:
+            return True
+        else:
+            return False
