@@ -52,7 +52,7 @@ class Auth:
         else:
             return False
 
-    def _generate_uuid():
+    def _generate_uuid() -> str:
         """ generate a uniq identifier 
         """
         return uuid.uuid4()
