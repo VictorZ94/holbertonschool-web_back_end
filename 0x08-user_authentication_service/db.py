@@ -46,8 +46,8 @@ class DB:
         """
         try:
             query = self._session.query(User).filter_by(**keyword)
-        except Exception:
-            raise InvalidRequestError
+        except InvalidRequestError:
+            return InvalidRequestError
         user = query.first()
         if user is None:
             raise NoResultFound
