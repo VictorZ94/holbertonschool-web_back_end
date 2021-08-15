@@ -54,15 +54,16 @@ class DB:
         else:
             return user
 
-    def update_user(self, user_id: int, **kwargs) -> None:
+    def update_user(self, user_id: int, **keyword) -> None:
         """ update user by arbitrary argument
         """
         user = self.find_user_by(id=user_id)
-        for k, v in kwargs.items():
-            dict_users = user.__dict__
-            if k in dict_users:
-                setattr(user, k, v)
-            else:
+        for key in keyword.keys():
+            if key not in user.__dict__:
                 raise ValueError
+
+        for k, v in keyword.items():
+            setattr(user, k, v)
+
         self._session.commit()
         return None
