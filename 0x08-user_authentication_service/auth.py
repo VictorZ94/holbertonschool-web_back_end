@@ -57,3 +57,15 @@ class Auth:
             return True
         else:
             return False
+
+    def create_session(self, email: str) -> str:
+        """ create a session and update it
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+        except Exception:
+            return None
+        session = _generate_uuid()
+        self._db.update_user(user.id, session_id=session)
+        user_up = self._db.find_user_by(email=email)
+        return session
