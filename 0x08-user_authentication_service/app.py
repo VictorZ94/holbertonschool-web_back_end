@@ -4,7 +4,6 @@
 from flask import (
                    Flask, jsonify, request, abort,
                    make_response,
-                   redirect
 )
 from auth import Auth
 
@@ -58,7 +57,7 @@ def logout():
     user = AUTH.get_user_from_session_id(session_id)
     if user:
         AUTH.destroy_session(user.id)
-        return redirect("/")
+        return "/"
     else:
         abort(403)
 
