@@ -18,6 +18,8 @@ def welcome():
 
 @app.route("/users", methods=['POST'], strict_slashes=False)
 def users():
+    """Create User application
+    """
     email = request.form.get('email')
     pwd = request.form.get('password')
 
@@ -30,7 +32,8 @@ def users():
 
 @app.route("/sessions", methods=['POST'], strict_slashes=False)
 def session():
-
+    """ Create a session per user
+    """
     email = request.form.get('email')
     pwd = request.form.get('password')
     check = AUTH.valid_login(email, pwd)
