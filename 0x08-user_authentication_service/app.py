@@ -37,11 +37,12 @@ def session():
     email = request.form.get('email')
     pwd = request.form.get('password')
     check = AUTH.valid_login(email, pwd)
-    if check:
+    if check and email is not None:
         session_id = AUTH.create_session(email)
-        res = make_response()
-        res.set_cookie("session_id", session_id)
-        return res
+        result = make_response()
+        result = jsonify({"email": f"{email}", "message": "logged in"})
+        result.set_cookie("session_id", session_id)
+        return result
     return abort(401)
 
 
