@@ -99,7 +99,7 @@ class Auth:
         self._db.update_user(user.id, reset_token=identifier)
         return identifier
 
-    def update_password(self, reset_token: str, password: str) -> str:
+    def update_password(self, reset_token: str, password: str) -> None:
         """ update password and reset token
         """
         try:
@@ -107,6 +107,5 @@ class Auth:
             new_password = _hash_password(password)
             self._db.update_user(user.id, hashed_password=new_password,
                                  reset_token=None)
-            return None
         except Exception:
             raise ValueError
