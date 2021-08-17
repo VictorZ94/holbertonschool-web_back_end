@@ -65,8 +65,7 @@ class DB:
                     setattr(user, k, v)
                 else:
                     raise ValueError
+            self._session.commit()
+            return None
         except Exception:
             raise ValueError
-
-        self._session.commit()
-        return None
