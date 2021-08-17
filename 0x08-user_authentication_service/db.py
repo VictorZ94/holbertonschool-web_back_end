@@ -58,12 +58,11 @@ class DB:
         """ update user by arbitrary argument
         """
         user = self.find_user_by(id=user_id)
-        for key in keyword.keys():
-            if key not in user.__dict__:
-                raise ValueError
-
         for k, v in keyword.items():
-            setattr(user, k, v)
+            if k in user.__dict__:
+                setattr(user, k, v)
+            else:
+                raise ValueError
 
         self._session.commit()
         return None
