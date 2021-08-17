@@ -89,7 +89,7 @@ class Auth:
         return None
 
     def get_reset_password_token(email: str) -> str:
-        """ update reset token 
+        """ update reset token
         """
         try:
             user = self._db.find_user_by(email=email)
