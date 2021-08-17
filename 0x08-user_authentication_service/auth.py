@@ -80,6 +80,8 @@ class Auth:
             return None
 
     def destroy_session(self, user_id: int) -> None:
+        """ destroy session
+        """
         try:
             user = self._db.find_user_by(id=user_id)
         except Exception:
@@ -99,23 +101,14 @@ class Auth:
         self._db.update_user(user.id, reset_token=identifier)
         return identifier
 
-    def update_password(self, reset_token: str, password: str) -> str:
-        """update_password
-        Args:
-            reset_token (str):
-            password (str):
-        Raises:
-            ValueError:
-        Returns:
-            None:
+    def update_password(self, reset_token: str, password: str) -> None:
+        """ update password and reset token
         """
         try:
             user = self._db.find_user_by(reset_token=reset_token)
-            pwd = _hash_password(password)
-            self._db.update_user(
-                user.id,
-                hashed_password=pwd,
-                reset_token=None)
+            new_password = _hash_password(password)
+            self._db.update_user(user.id, hashed_password=new_password,
+                                 reset_token=None)
             return None
         except Exception:
             raise ValueError
