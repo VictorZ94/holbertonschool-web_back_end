@@ -57,12 +57,15 @@ class DB:
     def update_user(self, user_id: int, **keyword) -> None:
         """ update user by arbitrary argument
         """
-        user = self.find_user_by(id=user_id)
-        for k, v in keyword.items():
-            if k in user.__dict__:
-                setattr(user, k, v)
-            else:
-                raise ValueError
+        try:
+            user = self.find_user_by(id=user_id)
+            for k, v in keyword.items():
+                if k in user.__dict__:
+                    setattr(user, k, v)
+                else:
+                    raise ValueError
+        except Exception:
+            raise ValueError
 
         self._session.commit()
         return None
