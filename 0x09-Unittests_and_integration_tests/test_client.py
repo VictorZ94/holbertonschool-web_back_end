@@ -4,7 +4,7 @@
     returns the correct value.
 """
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, PropertyMock
 from parameterized import parameterized
 from client import GithubOrgClient
 
@@ -34,3 +34,16 @@ class TestGithubOrgClient(unittest.TestCase):
         response = GithubOrgClient(param)
         response.org
         mock_get.assert_called_once()
+
+    def test_public_repos_url(self):
+        """ test a private method to filter data from json
+        """
+        with patch.object(GithubOrgClient, 'org', new_callable=PropertyMock) \
+                as mock_org:
+            mock_org.return_value = {
+                'unknown': 'Ok',
+                'repos_url': 'http://'
+            }
+            my_instance = GithubOrgClient('org')
+            value = my_instance.org
+            self.assertEqual(my_instance._public_repos_url, value['repos_url'])
