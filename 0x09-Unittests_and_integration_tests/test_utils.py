@@ -18,7 +18,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a", "b"), 2),
     ])
     def test_access_nested_map(self, nested_map, path, expected):
-        """test a function using pattern parameterized
+        """ test a function using pattern parameterized
         """
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
@@ -42,7 +42,7 @@ class TestGetJson(unittest.TestCase):
         ("http://holberton.io", {"payload": False}),
     ])
     def test_get_json(self, test_url, test_payload):
-        """mock testing to test http GET requests
+        """ mock testing to test http GET requests
 
         Args:
             test_url ([type]): [description]
