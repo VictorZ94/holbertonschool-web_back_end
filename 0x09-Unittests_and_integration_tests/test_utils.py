@@ -1,28 +1,21 @@
 #!/usr/bin/env python3
-""" getting started write test using methoology TDD,
-it has 3 steps fail, pass, refactor
-"""
+"""test utils module"""
+
 import unittest
+from unittest import mock
+from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
-from typing import (
-    Mapping,
-    Sequence,
-    Any,
-)
 
 
 class TestAccessNestedMap(unittest.TestCase):
-    """ unit test is the first step in TDD
-    it has 3 steps fail, pass, refactor
-    """
+    """class to test access
+    nested map method"""
+
     @parameterized.expand([
-        ({"a": 1}, ("a",), 1),
-        ({"a": {"b": 2}}, ("a",), {"b": 2}),
-        ({"a": {"b": 2}}, ("a", "b"), 2),
+        ({"a": 1}, ("a",), (1)),
+        ({"a": {"b": 2}}, ("a",), {'b': 2},),
+        ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
-    def test_access_nested_map(self, nested_map: Mapping,
-                               path: Sequence, expected: Any) -> None:
-        """ test a function using pattern parameterized
-        """
-        from utils import access_nested_map
+    def test_access_nested_map(self, nested_map, path, expected):
+        """test access nested map method"""
         self.assertEqual(access_nested_map(nested_map, path), expected)
