@@ -50,6 +50,11 @@ class TestGithubOrgClient(unittest.TestCase):
 
     @patch.object(GithubOrgClient, 'org')
     def test_public_repos(self, mock_org):
+        """ now  check or test public repos
+
+        Args:
+            mock_org ([type]): [description]
+        """
         payload = {
             'obj': {
                 'name': 'Victor',
@@ -63,7 +68,7 @@ class TestGithubOrgClient(unittest.TestCase):
         create_instance = GithubOrgClient('org')
         value = create_instance.org
 
-        with patch(f'{__name__}.GithubOrgClient._public_repos_url', 
+        with patch(f'{__name__}.GithubOrgClient._public_repos_url',
                    new_callable=PropertyMock) as mock_repos_url:
             mock_repos_url.return_value = value()['url_pattern']
             self.assertEqual(mock_repos_url(), 'repos_url')
