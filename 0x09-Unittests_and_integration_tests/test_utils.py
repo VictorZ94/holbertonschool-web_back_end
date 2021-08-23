@@ -4,6 +4,11 @@ it has 3 steps fail, pass, refactor
 """
 import unittest
 from parameterized import parameterized
+from typing import (
+    Mapping,
+    Sequence,
+    Any,
+)
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -15,7 +20,8 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2),
     ])
-    def test_access_nested_map(self, nested_map, path, expected):
+    def test_access_nested_map(self, nested_map: Mapping,
+                               path: Sequence, expected: Any) -> None:
         """ test a function using pattern parameterized
         """
         from utils import access_nested_map
