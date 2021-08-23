@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-""" getting started write test using methoology TDD,
-it has 3 steps fail, pass, refactor"""
+"""getting started write test using methoology TDD"""
+
 import unittest
-from utils import access_nested_map
+from unittest import mock
+from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
 
 
 class TestAccessNestedMap(unittest.TestCase):
-    """ unit test is the first step in TDD
-    it has 3 steps fail, pass, refactor
-    """
+    """unit test is the first
+    step in TDD"""
+
     @parameterized.expand([
         ({"a": 1}, ("a",), (1)),
         ({"a": {"b": 2}}, ("a",), {'b': 2},),
