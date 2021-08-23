@@ -6,6 +6,12 @@ import unittest
 from unittest.mock import patch
 from parameterized import parameterized
 
+from utils import (
+    get_json,
+    access_nested_map,
+    memoize,
+)
+
 
 class TestAccessNestedMap(unittest.TestCase):
     """ unit test is the first step in TDD
@@ -18,7 +24,6 @@ class TestAccessNestedMap(unittest.TestCase):
     ])
     def test_access_nested_map(self, nested_map, path, expected):
         """test a function using pattern parameterized"""
-        from utils import access_nested_map
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([
@@ -28,7 +33,6 @@ class TestAccessNestedMap(unittest.TestCase):
     def test_access_nested_map_exception(self, nested_map, expected):
         """ test assertion raises from exceptions
         """
-        from utils import access_nested_map
         with self.assertRaises(KeyError):
             access_nested_map(nested_map, expected)
 
@@ -48,7 +52,6 @@ class TestGetJson(unittest.TestCase):
             test_url ([type]): [description]
             test_payload ([type]): [description]
         """
-        from utils import get_json
         with patch("requests.get") as mock_get:
             mock_get.return_value.json.return_value = test_payload
             response = get_json(test_url)
@@ -66,8 +69,6 @@ class TestMemoize(unittest.TestCase):
         Args:
             unittest ([type]): [description]
         """
-        from utils import memoize
-
         class TestClass:
             """ Test Memoize class
             Args:
