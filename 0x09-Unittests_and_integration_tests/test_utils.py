@@ -60,6 +60,8 @@ class TestMemoize(unittest.TestCase):
     """
     def test_memoize(self):
         """ test class memoization
+        Args:
+            unittest ([type]): [description]
         """
         from utils import memoize
 
@@ -84,3 +86,4 @@ class TestMemoize(unittest.TestCase):
             self.assertEqual(value, 42)
             mock.method()
             mock.method.assert_called_once()
+            mock.assert_called_once()
