@@ -5,6 +5,7 @@
 import unittest
 from unittest.mock import patch
 from parameterized import parameterized
+from utils import access_nested_map
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -19,7 +20,6 @@ class TestAccessNestedMap(unittest.TestCase):
     def test_access_nested_map(self, nested_map, path, expected):
         """test a function using pattern parameterized
         """
-        from utils import access_nested_map
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([
@@ -27,13 +27,8 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": 1}, ("a", "b")),
     ])
     def test_access_nested_map_exception(self, nested_map, expected):
-        """test assertion raises from exceptions
-
-        Args:
-            nested_map ([type]): [description]
-            expected ([type]): [description]
+        """ test assertion raises from exceptions
         """
-        from utils import access_nested_map
         with self.assertRaises(KeyError):
             access_nested_map(nested_map, expected)
 
