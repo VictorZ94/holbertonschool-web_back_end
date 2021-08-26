@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{{ greeting['title'] }}</title>
+        <meta charset="UTF-8">
+        <title>{{ greeting.get('title') }}</title>
     </head>
     <body>
-        <h1>{{ greeting['header'] }}</h1>
+        <h1>{{ greeting.get('header') }}</h1>
     </body>
 </html>
