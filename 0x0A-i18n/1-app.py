@@ -19,7 +19,7 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def index():
     """ first index template to getting started translate
     Args:
@@ -29,4 +29,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run('0.0.0.0', '5000')
