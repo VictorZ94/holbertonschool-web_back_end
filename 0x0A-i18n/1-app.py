@@ -6,6 +6,7 @@ Description:
 from flask import Flask, render_template
 from flask_babel import Babel
 
+
 app = Flask(__name__)
 babel = Babel(app)
 
@@ -22,7 +23,7 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def index():
     """ first index template to getting started translate
     Args:
