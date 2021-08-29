@@ -63,6 +63,11 @@ def get_locale():
 
 
 def get_user():
+    """ Get user from mock db "users"
+
+    Returns:
+        [type]: [description]
+    """
     user_id = request.args.get('login_as')
     if user_id:
         return users.get(int(user_id))
@@ -70,6 +75,8 @@ def get_user():
 
 @app.before_request
 def before_request():
+    """ logged in user if is paased like args
+    """
     user = get_user()
     if user:
         g.user = user
