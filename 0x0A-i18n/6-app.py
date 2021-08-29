@@ -44,26 +44,7 @@ def index():
     Args:
         template rendering
     """
-    return render_template('5-index.html')
-
-
-@babel.localeselector
-def get_locale():
-    """ GET localization of my user
-
-    Returns:
-        the best languages apply to his/her zone
-    """
-    locale = request.args.get('locale')
-    if request.args.get('locale'):
-        locale = request.args.get('locale')
-        if locale in app.config['LANGUAGES']:
-            return locale
-    elif g.user and g.user.get('locale')\
-            and g.user.get('locale') in app.config['LANGUAGES']:
-        return g.user.get('locale')
-    else:
-        return request.accept_languages.best_match(locale)
+    return render_template('6-index.html')
 
 
 def get_user():
@@ -84,6 +65,26 @@ def before_request():
     user = get_user()
     if user:
         g.user = user
+    else:
+        g.user = None
+
+
+@babel.localeselector
+def get_locale():
+    """ GET localization of my user
+
+    Returns:
+        the best languages apply to his/her zone
+    """
+    locale = request.args.get('locale')
+    if locale:
+        if locale in app.config['LANGUAGES']:
+            return locale
+    elif g.user and g.user.get('locale')\
+            and g.user.get('locale') in app.config['LANGUAGES']:
+        return g.user.get('locale')
+    else:
+        return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 if __name__ == '__main__':
