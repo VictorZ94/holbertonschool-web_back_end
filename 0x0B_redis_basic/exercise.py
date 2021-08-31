@@ -2,7 +2,7 @@
 """ Getting started using redis
 """
 import redis
-from typing import Any
+from typing import Union
 import uuid
 
 
@@ -15,7 +15,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    def store(self, data: Any) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         """ create the first key-value pair into db
 
         Args:
