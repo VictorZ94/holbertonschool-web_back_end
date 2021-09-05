@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-""" Getting started using redis
-"""
+"""exercise"""
+
 import redis
-from functools import wraps
 from typing import Union, Optional, Callable
-import uuid
+from uuid import uuid4
+from functools import wraps
 
 
 def count_calls(method: Callable) -> Callable:
@@ -27,11 +27,13 @@ def count_calls(method: Callable) -> Callable:
 
 
 def call_history(method: Callable) -> Callable:
-    """call_history
+    """[summary]
+
     Args:
-        method (typing.Callable):
+        method (Callable): [description]
+
     Returns:
-        typing.Callable:
+        Callable: [description]
     """
     @wraps(method)
     def wrapper(self, *args, **kwargs):
@@ -46,9 +48,10 @@ def call_history(method: Callable) -> Callable:
 
 
 def replay(fn: Callable):
-    """replay
+    """[summary]
+
     Args:
-        fn (typing.Callable): display the history of calls
+        fn (Callable): [description]
     """
     r = redis.Redis()
     fn_name = fn.__qualname__
@@ -77,7 +80,7 @@ def replay(fn: Callable):
 
 class Cache:
 
-    def __init__(self):
+    def ___init__(self):
         """ Create first instace of redis and
         clean all db with flushdb
         """
@@ -88,28 +91,46 @@ class Cache:
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """ create the first key-value pair into db
-
         Args:
             data (Any): data can be a str, bytes, int or float.
-
         Returns:
             str: Uniq identifier ID
         """
-        ID = str(uuid.uuid4())
-        self._redis.mset({ID: data})
+        ID = str(uuid4())
+        self._redis.set(ID, data)
         return ID
 
     def get(self, key: str, fn: Optional[callable] = None) \
             -> Union[str, bytes, int, float]:
+        """ Create first instace of redis and
+        clean all db with flushdb
+        """
         if fn:
-            value = self._redis.get(key)
-            return value.decode('utf-8')
+            v = self._redis.get(key)
+
+        return v.decode("utf-8")
 
     def get_str(self, key: str) -> str:
-        value = self._redis.get(key)
-        return value.decode('utf-8')
+        """[summary]
+
+        Args:
+            key (str): [description]
+
+        Returns:
+            str: [description]
+        """
+        v = self._redis.get(key)
+        return v.decode("utf-8")
 
     def get_int(self, key: str) -> int:
+        """[summary]
+
+        Args:
+            key (str): [description]
+
+        Returns:
+            int: [description]
+        """
         v = self._redis.get(key)
         try:
             c = int(v.decode("utf-8"))
