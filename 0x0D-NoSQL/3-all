@@ -1,2 +1,2 @@
-// Insert a document into a collections
+// List all documents
 db.school.find()
