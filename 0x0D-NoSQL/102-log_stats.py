@@ -5,6 +5,14 @@ from pymongo import MongoClient
 
 
 def logs_stats_ip(mongo_collection):
+    """ Improving logs stats print ips
+
+    Args:
+        mongo_collection ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     return collection.aggregate([
         {
             "$group": {
