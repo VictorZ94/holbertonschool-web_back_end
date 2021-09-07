@@ -21,7 +21,7 @@ def logs_stats_ip(mongo_collection):
             }
         },
         {
-            "$sort": {"count": -1}
+            "$sort": {"count": -1, "_id": -1}
         },
         {
             "$limit": 10
