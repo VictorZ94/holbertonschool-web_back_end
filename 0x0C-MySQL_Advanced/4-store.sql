@@ -1,7 +1,9 @@
--- store
--- creates a trigger that decreases 
-CREATE TRIGGER orderdata
-BEFORE INSERT ON orders
-FOR EACH ROW UPDATE items 
-SET quantity = quantity - NEW.number 
-WHERE name = NEW.item_name;
+-- create first trigger
+DELIMITER $$
+CREATE TRIGGER decreases
+AFTER INSERT ON orders FOR EACH ROW
+BEGIN
+    UPDATE items
+    SET quantity = quantity - NEW.number
+    WHERE name = NEW.item_name;
+END$$
