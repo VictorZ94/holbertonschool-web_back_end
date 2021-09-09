@@ -1,4 +1,5 @@
 #!/usr/bin/node
+// using constant and let ES6
 export function taskFirst () {
   const task = 'I prefer const when I can.';
   return task;
