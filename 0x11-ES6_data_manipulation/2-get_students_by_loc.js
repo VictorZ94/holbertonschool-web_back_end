@@ -1,6 +1,6 @@
-function getStudentsByLocation(data) {
+function getStudentsByLocation(data, match) {
   if (Array.isArray(data)) {
-    return data.filter((elem) => elem.location === 'San Francisco');
+    data.filter((elem) => elem.location === match);
   }
   return [];
 }
