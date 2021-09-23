@@ -1,6 +1,6 @@
 function getStudentsByLocation(data, match) {
   if (Array.isArray(data)) {
-    data.filter((elem) => elem.location === match);
+    return data.filter((elem) => elem.location === match);
   }
   return [];
 }
