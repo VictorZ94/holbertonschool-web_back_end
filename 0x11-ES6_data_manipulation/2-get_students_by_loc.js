@@ -1,3 +1,5 @@
-const getStudentsByLocation = (data) => data.filter((elem) => elem.location === 'San Francisco');
+function getStudentsByLocation(data) {
+  return data.filter((elem) => elem.location === 'San Francisco');
+}
 
 export default getStudentsByLocation;
