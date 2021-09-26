@@ -20,11 +20,10 @@ function countStudents(filePath) {
       for (let iter1 = 0; iter1 < subArray.length; iter1 += 1) {
         newObject[subArray[iter1]] = arrayString[i].split(',')[iter1];
       }
+      arrayObject.push({ ...newObject });
     }
-    arrayObject.push({ ...newObject });
   }
   console.log(`Number of students: ${arrayObject.length}`);
-
   const fieldcs = arrayObject.filter((item) => item.field === 'CS');
   const fieldswe = arrayObject.filter((item) => item.field === 'SWE');
   console.log(`Number of students in CS: ${fieldcs.length}. List: ${fieldcs.map((item) => item.firstname).join(', ')}`);
