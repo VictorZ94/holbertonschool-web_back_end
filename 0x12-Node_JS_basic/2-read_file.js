@@ -5,7 +5,6 @@ function countStudents(filePath) {
   let data;
   const arrayObject = [];
   const newObject = {};
-  let i;
 
   try {
     data = fs.readFileSync(filePath);
@@ -15,7 +14,7 @@ function countStudents(filePath) {
   const arrayString = data.toString().split('\n');
   const subArray = arrayString[0].split(',');
 
-  for (i = 1; i < arrayString.length - 1; i += 1) {
+  for (let i = 1; i < arrayString.length - 1; i += 1) {
     if (arrayString[i] !== '') {
       for (let iter1 = 0; iter1 < subArray.length; iter1 += 1) {
         newObject[subArray[iter1]] = arrayString[i].split(',')[iter1];
