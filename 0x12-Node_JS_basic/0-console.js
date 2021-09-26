@@ -1,6 +1,6 @@
 #!/usr/bin/node
-const displayMessage = (greeting) => {
-  process.stdout.write(`${greeting}\n`);
-};
+function displayMessage(greeting) {
+  console.log(greeting);
+}
 
 module.exports = displayMessage;
