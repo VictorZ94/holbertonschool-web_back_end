@@ -16,8 +16,8 @@ function countStudents(filePath) {
 
   for (const i in arrayString) {
     if (arrayString[i] !== '' && i !== 0) {
-      for (const j in subArray) {
-        newObject[subArray[j]] = arrayString[i].split(',')[j];
+      for (let iter1 = 0; iter1 < subArray.length; iter1 += 1) {
+        newObject[subArray[iter1]] = arrayString[i].split(',')[iter1];
       }
       arrayObject.push({ ...newObject });
     }
