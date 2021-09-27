@@ -14,14 +14,15 @@ function countStudents(filePath) {
   const arrayString = data.toString().split('\n');
   const subArray = arrayString[0].split(',');
 
-  for (let i = 1; i < arrayString.length - 1; i += 1) {
-    if (arrayString[i] !== '') {
-      for (let iter1 = 0; iter1 < subArray.length; iter1 += 1) {
-        newObject[subArray[iter1]] = arrayString[i].split(',')[iter1];
+  for (const i in arrayString) {
+    if (arrayString[i] !== '' && i !== 0) {
+      for (const j in subArray) {
+        newObject[subArray[j]] = arrayString[i].split(',')[j];
       }
       arrayObject.push({ ...newObject });
     }
   }
+  arrayObject.shift();
   console.log(`Number of students: ${arrayObject.length}`);
   const fieldcs = arrayObject.filter((item) => item.field === 'CS');
   const fieldswe = arrayObject.filter((item) => item.field === 'SWE');
