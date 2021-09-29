@@ -9,7 +9,7 @@ function countStudents(filePath) {
   try {
     data = fs.readFileSync(filePath);
   } catch (error) {
-    throw new Error('Cannot load the database');
+    throw('Cannot load the database');
   }
   const arrayString = data.toString().split('\n');
   const subArray = arrayString[0].split(',');
