@@ -71,6 +71,15 @@ describe('calculateNumber', () => {
         it('too much decimals negative', () => {
             assert.strictEqual(calculateNumber('SUBTRACT', 9.23456789, 1.876543210), -7, 'float numbers');
         });
+        it('negative args', () => {
+            assert.strictEqual(calculateNumber('SUBTRACT', -20.89, -1.2), 20, 'Negative arguments');
+        });
+        it('one args as negative number', () => {
+            assert.strictEqual(calculateNumber('SUBTRACT', -6.9, 9.00001), 16, 'Negative arguments');
+        });
+        it('Positive numbers', () => {
+            assert.strictEqual(calculateNumber('SUBTRACT', 1.4, 4.5), 4, 'Positive arguments');
+        });
     });
 
     // Test case for Divide operator
@@ -104,6 +113,9 @@ describe('calculateNumber', () => {
         });
         it('Divide by 0', () => {
             assert.strictEqual(calculateNumber('DIVIDE', 1.23456789, 0), 'Error', 'Divide by 0');
+        });
+        it('Divide by number negative', () => {
+            assert.strictEqual(calculateNumber('DIVIDE', -9, -3), 3, 'Divide by negative numbers');
         });
     });
 });
