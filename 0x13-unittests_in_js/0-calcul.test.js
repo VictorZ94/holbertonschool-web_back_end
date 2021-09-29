@@ -1,11 +1,11 @@
-const assert = require('chai').assert;
+const assert = require('assert');
 const calculateNumber = require("./0-calcul.js");
 
 describe('calculateNumber', () => {
 
     // block prototype
-    it('is a function', () => {
-        assert.isFunction(calculateNumber, 'should be prototype of function');
+    it('is number', () => {
+        assert.ok(typeof calculateNumber(3, 4), 'should instace of number');
     });
 
     // test values
