@@ -1,33 +1,37 @@
 #!/usr/bin/node
 const fs = require('fs');
 
-function countStudents(filePath) {
-  let data;
-  const arrayObject = [];
-  const newObject = {};
+function countStudents(path) {
+  let content;
 
   try {
-    data = fs.readFileSync(filePath);
-  } catch (error) {
+    content = fs.readFileSync(path);
+  } catch (err) {
     throw new Error('Cannot load the database');
   }
-  const arrayString = data.toString().split('\n');
-  const subArray = arrayString[0].split(',');
+  content = content.toString().split('\n');
+  let students = content.filter((item) => item);
+  students = students.map((item) => item.split(','));
+  const NUMBER_OF_STUDENTS = students.length ? students.length - 1 : 0;
+  console.log(`Number of students: ${NUMBER_OF_STUDENTS}`);
+  const fields = {};
 
-  for (const i in arrayString) {
-    if (arrayString[i] !== '' && i !== 0) {
-      for (let iter1 = 0; iter1 < subArray.length; iter1 += 1) {
-        newObject[subArray[iter1]] = arrayString[i].split(',')[iter1];
-      }
-      arrayObject.push({ ...newObject });
+  for (const i in students) {
+    if (i !== 0) {
+      if (!fields[students[i][3]]) fields[students[i][3]] = [];
+
+      fields[students[i][3]].push(students[i][0]);
     }
   }
-  arrayObject.shift();
-  console.log(`Number of students: ${arrayObject.length}`);
-  const fieldcs = arrayObject.filter((item) => item.field === 'CS');
-  const fieldswe = arrayObject.filter((item) => item.field === 'SWE');
-  console.log(`Number of students in CS: ${fieldcs.length}. List: ${fieldcs.map((item) => item.firstname).join(', ')}`);
-  console.log(`Number of students in SWE: ${fieldswe.length}. List: ${fieldswe.map((item) => item.firstname).join(', ')}`);
+  delete fields.field;
+
+  for (const key of Object.keys(fields)) {
+    console.log(
+      `Number of students in ${key}: ${fields[key].length}. List: ${fields[
+        key
+      ].join(', ')}`,
+    );
+  }
 }
 
 module.exports = countStudents;
