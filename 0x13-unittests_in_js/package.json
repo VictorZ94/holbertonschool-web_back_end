@@ -1,0 +1,22 @@
+{
+  "name": "mochachai",
+  "version": "1.0.0",
+  "description": "This project to write a simple test suite",
+  "main": "0-calcul.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha"
+  },
+  "keywords": [
+    "mocha",
+    "chai",
+    "javascript",
+    "test",
+    "unittest"
+  ],
+  "author": "VictoZ",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*"
+  }
+}

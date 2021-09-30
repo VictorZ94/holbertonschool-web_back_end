@@ -5,9 +5,15 @@ function countStudents(path) {
   let content;
 
   try {
+<<<<<<< HEAD
     content = fs.readFileSync(path);
   } catch (err) {
     throw new Error('Cannot load the database');
+=======
+    data = fs.readFileSync(filePath);
+  } catch (error) {
+    throw('Cannot load the database');
+>>>>>>> 11228ac2304aa8da758ba9bd5c7836887523e290
   }
   content = content.toString().split('\n');
   let students = content.filter((item) => item);
