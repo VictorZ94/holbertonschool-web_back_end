@@ -1,34 +1,41 @@
 #!/usr/bin/node
 const fs = require('fs');
 
-function countStudents(filePath) {
+function countStudents(path) {
   return new Promise((resolve, reject) => {
-    fs.readFile(filePath, (err, data) => {
+    fs.readFile(path, 'utf8', (err, data) => {
       if (err) {
-        return reject(Error('Cannot load the database'));
+        reject(Error('Cannot load the database'));
+        return;
       }
+      const response = [];
+      let msg;
+      const content = data.toString().split('\n');
+      let students = content.filter((item) => item);
+      students = students.map((item) => item.split(','));
+      const NUMBER_OF_STUDENTS = students.length ? students.length - 1 : 0;
+      msg = `Number of students: ${NUMBER_OF_STUDENTS}`;
+      console.log(msg);
+      response.push(msg);
+      const fields = {};
 
-      const arrayObject = [];
-      const newObject = {};
+      for (const i in students) {
+        if (i !== 0) {
+          if (!fields[students[i][3]]) fields[students[i][3]] = [];
 
-      const arrayString = data.toString().split('\n');
-      const subArray = arrayString[0].split(',');
-
-      for (const i in arrayString) {
-        if (arrayString[i] !== '' && i !== 0) {
-          for (let iter1 = 0; iter1 < subArray.length; iter1 += 1) {
-            newObject[subArray[iter1]] = arrayString[i].split(',')[iter1];
-          }
-          arrayObject.push({ ...newObject });
+          fields[students[i][3]].push(students[i][0]);
         }
       }
-      arrayObject.shift();
-      console.log(`Number of students: ${arrayObject.length}`);
-      const fieldcs = arrayObject.filter((item) => item.field === 'CS');
-      const fieldswe = arrayObject.filter((item) => item.field === 'SWE');
-      console.log(`Number of students in CS: ${fieldcs.length}. List: ${fieldcs.map((item) => item.firstname).join(', ')}`);
-      console.log(`Number of students in SWE: ${fieldswe.length}. List: ${fieldswe.map((item) => item.firstname).join(', ')}`);
-      return resolve(arrayObject);
+      delete fields.field;
+
+      for (const key of Object.keys(fields)) {
+        msg = `Number of students in ${key}: ${
+          fields[key].length
+        }. List: ${fields[key].join(', ')}`;
+        console.log(msg);
+        response.push(msg);
+      }
+      resolve(response);
     });
   });
 }
